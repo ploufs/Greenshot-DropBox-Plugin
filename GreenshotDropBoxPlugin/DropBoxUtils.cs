@@ -38,8 +38,8 @@ namespace GreenshotDropboxPlugin {
 	/// </summary>
 	public class DropboxUtils {
 		private static readonly log4net.ILog LOG = log4net.LogManager.GetLogger(typeof(DropboxUtils));
-		public static string DROPBOX_APP_KEY = "uenz04wo9b4jrc8";
-		public static string DROPBOX_APP_SECRET = "im1609dep8eq8o4";
+		public static string DROPBOX_APP_KEY = "SET APP KEY HERE";
+		public static string DROPBOX_APP_SECRET = "SET APP SECRET HERE";
 		private static DropBoxConfiguration config = IniConfig.GetIniSection<DropBoxConfiguration>();
 
 		private DropboxUtils() {
