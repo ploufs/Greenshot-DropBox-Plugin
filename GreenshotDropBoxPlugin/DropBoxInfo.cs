@@ -22,13 +22,13 @@ using System;
 using System.Drawing;
 using System.Xml;
 
-namespace GreenshotDropBoxPlugin
+namespace GreenshotDropboxPlugin
 {
 	/// <summary>
 	/// Description of ImgurInfo.
 	/// </summary>
-	public class DropBoxInfo : IDisposable {
-		private static readonly log4net.ILog LOG = log4net.LogManager.GetLogger(typeof(DropBoxInfo));
+	public class DropboxInfo : IDisposable {
+		private static readonly log4net.ILog LOG = log4net.LogManager.GetLogger(typeof(DropboxInfo));
 
 
 		private string id;
@@ -73,7 +73,7 @@ namespace GreenshotDropBoxPlugin
 		}
 
 
-		public DropBoxInfo() {
+		public DropboxInfo() {
 		}
 
 		/// <summary>

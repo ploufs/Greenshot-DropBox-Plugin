@@ -1,6 +1,6 @@
 /*
  * Greenshot - a free and open source screenshot tool
- * Copyright (C) 2011  Francis Noel
+ * Copyright (C) 2011-2012  Francis Noel
  * 
  * For more information see: http://getgreenshot.org/
  * The Greenshot project is hosted on Sourceforge: http://sourceforge.net/projects/greenshot/
@@ -30,18 +30,18 @@ using System.Windows.Forms;
 using System.Xml;
 
 using Greenshot.Plugin;
-using GreenshotDropBoxPlugin.Forms;
+using GreenshotDropboxPlugin.Forms;
 using GreenshotPlugin.Controls;
 using GreenshotPlugin.Core;
 
-namespace GreenshotDropBoxPlugin
+namespace GreenshotDropboxPlugin
 {
     /// <summary>
-    /// This is the DropBox base code
+    /// This is the Dropbox base code
     /// </summary>
-    public class DropBoxPlugin : IGreenshotPlugin
+    public class DropboxPlugin : IGreenshotPlugin
     {
-        private static readonly log4net.ILog LOG = log4net.LogManager.GetLogger(typeof(DropBoxPlugin));
+        private static readonly log4net.ILog LOG = log4net.LogManager.GetLogger(typeof(DropboxPlugin));
         private static DropBoxConfiguration config;
         public static PluginAttribute Attributes;
         private ILanguage lang = Language.GetInstance();
@@ -49,7 +49,7 @@ namespace GreenshotDropBoxPlugin
         private ICaptureHost captureHost = null;
         private ComponentResourceManager resources;
 
-        public DropBoxPlugin()
+        public DropboxPlugin()
         {
         }
 
@@ -68,10 +68,10 @@ namespace GreenshotDropBoxPlugin
 
             // Register configuration (don't need the configuration itself)
             config = IniConfig.GetIniSection<DropBoxConfiguration>();
-            resources = new ComponentResourceManager(typeof(DropBoxPlugin));
+            resources = new ComponentResourceManager(typeof(DropboxPlugin));
 
-            // load DropBoxAccessToken from file
-            DropBoxUtils.LoadAccessToken();
+            // load DropboxAccessToken from file
+            DropboxUtils.LoadAccessToken();
 
         }
 
@@ -107,7 +107,7 @@ namespace GreenshotDropBoxPlugin
         private void ImageEditorOpened(object sender, ImageEditorOpenEventArgs eventArgs)
         {
             ToolStripMenuItem itemFile = new ToolStripMenuItem();
-            itemFile.Text = lang.GetString(LangKey.upload_menu_item); //"Upload to DropBox";
+            itemFile.Text = lang.GetString(LangKey.upload_menu_item); //"Upload to Dropbox";
             itemFile.Tag = eventArgs.ImageEditor;
             itemFile.Click += new System.EventHandler(EditMenuClick);
             itemFile.ShortcutKeys = ((Keys)((Keys.Control | Keys.D)));
@@ -142,8 +142,8 @@ namespace GreenshotDropBoxPlugin
 
         public void HistoryMenuClick(object sender, EventArgs eventArgs)
         {
-            DropBoxUtils.LoadHistory();
-            DropBoxHistory.ShowHistory();
+            DropboxUtils.LoadHistory();
+            DropboxHistory.ShowHistory();
         }
 
         public void ConfigMenuClick(object sender, EventArgs eventArgs)
@@ -156,7 +156,7 @@ namespace GreenshotDropBoxPlugin
         /// </summary>
         public void EditMenuClick(object sender, EventArgs eventArgs)
         {
-            if (config.DropBoxAccessToken==null)
+            if (config.DropboxAccessToken==null)
             {
                 MessageBox.Show(lang.GetString(LangKey.TokenNotSet), string.Empty, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -173,36 +173,36 @@ namespace GreenshotDropBoxPlugin
                     try
                     {
                         string filename = Path.GetFileName(host.GetFilename(config.UploadFormat, imageEditor.CaptureDetails));
-                        DropBoxInfo DropBoxInfo = DropBoxUtils.UploadToDropBox(buffer, imageEditor.CaptureDetails.Title, filename);
+                        DropboxInfo DropboxInfo = DropboxUtils.UploadToDropbox(buffer, imageEditor.CaptureDetails.Title, filename);
 
-                        if (config.DropBoxUploadHistory == null)
+                        if (config.DropboxUploadHistory == null)
                         {
-                            config.DropBoxUploadHistory = new Dictionary<string, string>();
+                            config.DropboxUploadHistory = new Dictionary<string, string>();
                         }
 
-                        if (DropBoxInfo.ID != null)
+                        if (DropboxInfo.ID != null)
                         {
-                            LOG.InfoFormat("Storing Dropbox upload for id {0}", DropBoxInfo.ID);
+                            LOG.InfoFormat("Storing Dropbox upload for id {0}", DropboxInfo.ID);
 
-                            config.DropBoxUploadHistory.Add(DropBoxInfo.ID, DropBoxInfo.ID);
-                            config.runtimeDropBoxHistory.Add(DropBoxInfo.ID, DropBoxInfo);
+                            config.DropboxUploadHistory.Add(DropboxInfo.ID, DropboxInfo.ID);
+                            config.runtimeDropboxHistory.Add(DropboxInfo.ID, DropboxInfo);
                         }
 
-                        DropBoxInfo.Image = DropBoxUtils.CreateThumbnail(imageEditor.GetImageForExport(), 90, 90);
+                        DropboxInfo.Image = DropboxUtils.CreateThumbnail(imageEditor.GetImageForExport(), 90, 90);
                         // Make sure the configuration is save, so we don't lose the deleteHash
                         IniConfig.Save();
                         // Make sure the history is loaded, will be done only once
-                        DropBoxUtils.LoadHistory();
+                        DropboxUtils.LoadHistory();
 
                         // Show
                         if (config.AfterUploadOpenHistory)
                         {
-                            DropBoxHistory.ShowHistory();
+                            DropboxHistory.ShowHistory();
                         }
 
                         if (config.AfterUploadLinkToClipBoard)
                         {
-                            Clipboard.SetText(DropBoxInfo.WebUrl);
+                            Clipboard.SetText(DropboxInfo.WebUrl);
                         }
 
                     }

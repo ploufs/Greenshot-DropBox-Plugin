@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenshotDropBoxPlugin", "GreenshotDropBoxPlugin\GreenshotDropBoxPlugin.csproj", "{80D8DEB9-94E3-4876-8CCA-2DF1ED5F2C50}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenshotDropboxPlugin", "GreenshotDropBoxPlugin\GreenshotDropboxPlugin.csproj", "{80D8DEB9-94E3-4876-8CCA-2DF1ED5F2C50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,6 +1,6 @@
 ﻿/*
  * Greenshot - a free and open source screenshot tool
- * Copyright (C) 2011  Francis  Noel
+ * Copyright (C) 2011-2012  Francis  Noel
  * 
  * For more information see: http://getgreenshot.org/
  * The Greenshot project is hosted on Sourceforge: http://sourceforge.net/projects/greenshot/
@@ -26,14 +26,14 @@ using GreenshotPlugin.Controls;
 using GreenshotPlugin.Core;
 using AppLimit.CloudComputing.SharpBox;
 
-namespace GreenshotDropBoxPlugin {
+namespace GreenshotDropboxPlugin {
 	/// <summary>
 	/// Description of ImgurConfiguration.
 	/// </summary>
-	[IniSection("DropBox", Description = "Greenshot DropBox Plugin configuration")]
+	[IniSection("Dropbox", Description = "Greenshot Dropbox Plugin configuration")]
 	public class DropBoxConfiguration : IniSection {
-		[IniProperty("DropBoxAccessToken", Description = "Token.", DefaultValue = "")]
-		public ICloudStorageAccessToken DropBoxAccessToken;
+		[IniProperty("DropboxAccessToken", Description = "Token.", DefaultValue = "")]
+		public ICloudStorageAccessToken DropboxAccessToken;
 
 		[IniProperty("UploadFormat", Description="What file type to use for uploading", DefaultValue="png")]
 		public OutputFormat UploadFormat;
@@ -47,11 +47,11 @@ namespace GreenshotDropBoxPlugin {
 		[IniProperty("AfterUploadLinkToClipBoard", Description = "After upload send Dropbox link to clipboard.", DefaultValue = "true")]
 		public bool AfterUploadLinkToClipBoard;
 
-		[IniProperty("DropBoxUploadHistory", Description = "DropBox upload history (DropBoxUploadHistory.hash=deleteHash)")]
-		public Dictionary<string, string> DropBoxUploadHistory;
+		[IniProperty("DropboxUploadHistory", Description = "Dropbox upload history (DropboxUploadHistory.hash=deleteHash)")]
+		public Dictionary<string, string> DropboxUploadHistory;
 		
 		// Not stored, only run-time!
-		public Dictionary<string, DropBoxInfo> runtimeDropBoxHistory = new Dictionary<string, DropBoxInfo>();
+		public Dictionary<string, DropboxInfo> runtimeDropboxHistory = new Dictionary<string, DropboxInfo>();
 
 		/// <summary>
 		/// Supply values we can't put as defaults
@@ -60,7 +60,7 @@ namespace GreenshotDropBoxPlugin {
 		/// <returns>object with the default value for the supplied property</returns>
 		public override object GetDefault(string property) {
 			switch(property) {
-				case "DropBoxUploadHistory":
+				case "DropboxUploadHistory":
 					return new Dictionary<string, string>();
 			}
 			return null;
@@ -73,13 +73,13 @@ namespace GreenshotDropBoxPlugin {
 			SettingsForm settingsForm;
 			ILanguage lang = Language.GetInstance();
 
-			BackgroundForm backgroundForm = BackgroundForm.ShowAndWait(DropBoxPlugin.Attributes.Name, lang.GetString(LangKey.communication_wait));
+			BackgroundForm backgroundForm = BackgroundForm.ShowAndWait(DropboxPlugin.Attributes.Name, lang.GetString(LangKey.communication_wait));
 			try {
 				settingsForm = new SettingsForm(this);
 			} finally {
 				backgroundForm.CloseDialog();
 			}
-			settingsForm.AuthToken = this.DropBoxAccessToken;
+			settingsForm.AuthToken = this.DropboxAccessToken;
 			settingsForm.UploadFormat = this.UploadFormat.ToString();
 			settingsForm.AfterUploadOpenHistory = this.AfterUploadOpenHistory;
 			settingsForm.AfterUploadLinkToClipBoard  = this.AfterUploadLinkToClipBoard;
@@ -87,15 +87,15 @@ namespace GreenshotDropBoxPlugin {
 			if (result == DialogResult.OK)
 			{
 
-				this.DropBoxAccessToken = settingsForm.AuthToken;
+				this.DropboxAccessToken = settingsForm.AuthToken;
 				this.UploadFormat = (OutputFormat)Enum.Parse(typeof(OutputFormat), settingsForm.UploadFormat.ToLower());
 				
 				this.AfterUploadOpenHistory=settingsForm.AfterUploadOpenHistory;
 				this.AfterUploadLinkToClipBoard=settingsForm.AfterUploadLinkToClipBoard;
 				IniConfig.Save();
 
-				// Save DropBoxAccessToken from file
-				DropBoxUtils.SaveAccessToken();
+				// Save DropboxAccessToken from file
+				DropboxUtils.SaveAccessToken();
 
 				return true;
 			}

@@ -20,7 +20,7 @@
  */
 using System;
 
-namespace GreenshotDropBoxPlugin {
+namespace GreenshotDropboxPlugin {
     public enum LangKey
     {
         buttonAuthenticate,

@@ -1,6 +1,6 @@
 ﻿/*
  * Greenshot - a free and open source screenshot tool
- * Copyright (C) 2011  Francis Noel
+ * Copyright (C) 2011-2012  Francis Noel
  * 
  * For more information see: http://getgreenshot.org/
  * The Greenshot project is hosted on Sourceforge: http://sourceforge.net/projects/greenshot/
@@ -27,26 +27,26 @@ using System.Windows.Forms;
 using GreenshotPlugin.Controls;
 using GreenshotPlugin.Core;
 
-namespace GreenshotDropBoxPlugin.Forms {
+namespace GreenshotDropboxPlugin.Forms {
 	/// <summary>
 	/// Description of ImgurHistory.
 	/// </summary>
-	public partial class DropBoxHistory : Form {
-		private static readonly log4net.ILog LOG = log4net.LogManager.GetLogger(typeof(DropBoxHistory));
+	public partial class DropboxHistory : Form {
+		private static readonly log4net.ILog LOG = log4net.LogManager.GetLogger(typeof(DropboxHistory));
 		private ListViewColumnSorter columnSorter;
 		private static DropBoxConfiguration config = IniConfig.GetIniSection<DropBoxConfiguration>();
 		private ILanguage lang = Language.GetInstance();
-		private static DropBoxHistory instance;
+		private static DropboxHistory instance;
 		
 		public static void ShowHistory() {
 			if (instance == null) {
-				instance = new DropBoxHistory();
+				instance = new DropboxHistory();
 			}
 			instance.Show();
 			instance.redraw();
 		}
 		
-		private DropBoxHistory() {
+		private DropboxHistory() {
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//
@@ -54,53 +54,53 @@ namespace GreenshotDropBoxPlugin.Forms {
 
 			// Init sorting
 			columnSorter = new ListViewColumnSorter();
-			this.listview_DropBox_uploads.ListViewItemSorter = columnSorter;
+			this.listview_Dropbox_uploads.ListViewItemSorter = columnSorter;
 			columnSorter.SortColumn = 2; //sort by date
 			columnSorter.Order = SortOrder.Descending;
 			redraw();
-			if (listview_DropBox_uploads.Items.Count > 0) {
-				listview_DropBox_uploads.Items[0].Selected = true;
+			if (listview_Dropbox_uploads.Items.Count > 0) {
+				listview_Dropbox_uploads.Items[0].Selected = true;
 			}
 		}
 
 		private void redraw() {
-			listview_DropBox_uploads.BeginUpdate();
-			listview_DropBox_uploads.Items.Clear();
-			listview_DropBox_uploads.Columns.Clear();
+			listview_Dropbox_uploads.BeginUpdate();
+			listview_Dropbox_uploads.Items.Clear();
+			listview_Dropbox_uploads.Columns.Clear();
 			string[] columns = { "Id", "Title", "Date"};
 			foreach (string column in columns) {
-				listview_DropBox_uploads.Columns.Add(column);
+				listview_Dropbox_uploads.Columns.Add(column);
 			}
-			foreach (DropBoxInfo imgurInfo in config.runtimeDropBoxHistory.Values) {
+			foreach (DropboxInfo imgurInfo in config.runtimeDropboxHistory.Values) {
 				ListViewItem item = new ListViewItem(imgurInfo.ID);
 				item.Tag = imgurInfo;
 				item.SubItems.Add(imgurInfo.Title);
 				item.SubItems.Add(imgurInfo.Timestamp.ToString());
-				listview_DropBox_uploads.Items.Add(item);
+				listview_Dropbox_uploads.Items.Add(item);
 			}
 			for (int i = 0; i < columns.Length; i++) {
-				listview_DropBox_uploads.AutoResizeColumn(i, ColumnHeaderAutoResizeStyle.ColumnContent);
+				listview_Dropbox_uploads.AutoResizeColumn(i, ColumnHeaderAutoResizeStyle.ColumnContent);
 			}
 	
-			listview_DropBox_uploads.EndUpdate();
-			listview_DropBox_uploads.Refresh();
+			listview_Dropbox_uploads.EndUpdate();
+			listview_Dropbox_uploads.Refresh();
 			deleteButton.Enabled = false;
 			openButton.Enabled = false;
 			clipboardButton.Enabled = false;
 		}
 
-		private void Listview_DropBox_uploadsSelectedIndexChanged(object sender, EventArgs e) {
-			pictureBox_DropBox.Image = null;
-			if (listview_DropBox_uploads.SelectedItems != null && listview_DropBox_uploads.SelectedItems.Count > 0) {
+		private void Listview_Dropbox_uploadsSelectedIndexChanged(object sender, EventArgs e) {
+			pictureBox_Dropbox.Image = null;
+			if (listview_Dropbox_uploads.SelectedItems != null && listview_Dropbox_uploads.SelectedItems.Count > 0) {
 				deleteButton.Enabled = true;
 				openButton.Enabled = true;
 				clipboardButton.Enabled = true;
-				if (listview_DropBox_uploads.SelectedItems.Count == 1) {
-					DropBoxInfo imgurInfo = (DropBoxInfo)listview_DropBox_uploads.SelectedItems[0].Tag;
-					pictureBox_DropBox.Image = imgurInfo.Image;
+				if (listview_Dropbox_uploads.SelectedItems.Count == 1) {
+					DropboxInfo imgurInfo = (DropboxInfo)listview_Dropbox_uploads.SelectedItems[0].Tag;
+					pictureBox_Dropbox.Image = imgurInfo.Image;
 				}
 			} else {
-				pictureBox_DropBox.Image = null;
+				pictureBox_Dropbox.Image = null;
 				deleteButton.Enabled = false;
 				openButton.Enabled = false;
 				clipboardButton.Enabled = false;
@@ -139,7 +139,7 @@ namespace GreenshotDropBoxPlugin.Forms {
 			}
 
 			// Perform the sort with these new sort options.
-			this.listview_DropBox_uploads.Sort();
+			this.listview_Dropbox_uploads.Sort();
 		}
 
 		
@@ -158,29 +158,29 @@ namespace GreenshotDropBoxPlugin.Forms {
 			this.deletePicture();
 		}
 
-		private void pictureBox_DropBox_Click(object sender, EventArgs e)
+		private void pictureBox_Dropbox_Click(object sender, EventArgs e)
 		{
 			this.openPicture();
 		}
 
 		private void deletePicture()
 		{
-			if (listview_DropBox_uploads.SelectedItems != null && listview_DropBox_uploads.SelectedItems.Count > 0)
+			if (listview_Dropbox_uploads.SelectedItems != null && listview_Dropbox_uploads.SelectedItems.Count > 0)
 			{
-				for (int i = 0; i < listview_DropBox_uploads.SelectedItems.Count; i++)
+				for (int i = 0; i < listview_Dropbox_uploads.SelectedItems.Count; i++)
 				{
-					DropBoxInfo imgurInfo = (DropBoxInfo)listview_DropBox_uploads.SelectedItems[i].Tag;
+					DropboxInfo imgurInfo = (DropboxInfo)listview_Dropbox_uploads.SelectedItems[i].Tag;
 					DialogResult result = MessageBox.Show(lang.GetFormattedString(LangKey.delete_question, imgurInfo.Title), lang.GetFormattedString(LangKey.delete_title, imgurInfo.ID), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 					if (result == DialogResult.Yes)
 					{
-						BackgroundForm backgroundForm = BackgroundForm.ShowAndWait(DropBoxPlugin.Attributes.Name, lang.GetString(LangKey.communication_wait));
+						BackgroundForm backgroundForm = BackgroundForm.ShowAndWait(DropboxPlugin.Attributes.Name, lang.GetString(LangKey.communication_wait));
 						try
 						{
-							DropBoxUtils.DeleteDropBoxImage(imgurInfo);
+							DropboxUtils.DeleteDropboxImage(imgurInfo);
 						}
 						catch (Exception ex)
 						{
-							LOG.Warn("Problem communicating with DropBox: ", ex);
+							LOG.Warn("Problem communicating with Dropbox: ", ex);
 						}
 						finally
 						{
@@ -196,11 +196,11 @@ namespace GreenshotDropBoxPlugin.Forms {
 
 		private void openPicture()
 		{
-			if (listview_DropBox_uploads.SelectedItems != null && listview_DropBox_uploads.SelectedItems.Count > 0)
+			if (listview_Dropbox_uploads.SelectedItems != null && listview_Dropbox_uploads.SelectedItems.Count > 0)
 			{
-				for (int i = 0; i < listview_DropBox_uploads.SelectedItems.Count; i++)
+				for (int i = 0; i < listview_Dropbox_uploads.SelectedItems.Count; i++)
 				{
-					DropBoxInfo imgurInfo = (DropBoxInfo)listview_DropBox_uploads.SelectedItems[i].Tag;
+					DropboxInfo imgurInfo = (DropboxInfo)listview_Dropbox_uploads.SelectedItems[i].Tag;
 
 					System.Diagnostics.Process.Start(imgurInfo.WebUrl);
 				}
@@ -210,13 +210,13 @@ namespace GreenshotDropBoxPlugin.Forms {
 		private void clipboardUrl()
 		{
 			StringBuilder links = new StringBuilder();
-			if (listview_DropBox_uploads.SelectedItems != null && listview_DropBox_uploads.SelectedItems.Count > 0)
+			if (listview_Dropbox_uploads.SelectedItems != null && listview_Dropbox_uploads.SelectedItems.Count > 0)
 			{
-				for (int i = 0; i < listview_DropBox_uploads.SelectedItems.Count; i++)
+				for (int i = 0; i < listview_Dropbox_uploads.SelectedItems.Count; i++)
 				{
-					DropBoxInfo DropBoxInfo = (DropBoxInfo)listview_DropBox_uploads.SelectedItems[i].Tag;
+					DropboxInfo DropboxInfo = (DropboxInfo)listview_Dropbox_uploads.SelectedItems[i].Tag;
 
-					links.AppendLine(DropBoxInfo.WebUrl);
+					links.AppendLine(DropboxInfo.WebUrl);
 				}
 			}
 			try

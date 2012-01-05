@@ -5,8 +5,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Library</OutputType>
-    <RootNamespace>GreenshotDropBoxPlugin</RootNamespace>
-    <AssemblyName>TempGreenshotDropBoxPlugin</AssemblyName>
+    <RootNamespace>GreenshotDropboxPlugin</RootNamespace>
+    <AssemblyName>TempGreenshotDropboxPlugin</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SourceAnalysisOverrideSettingsFile>C:\Users\Robin\AppData\Roaming\ICSharpCode/SharpDevelop3.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
@@ -83,15 +83,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DropBoxConfiguration.cs" />
-    <Compile Include="DropBoxInfo.cs" />
-    <Compile Include="DropBoxPlugin.cs" />
-    <Compile Include="DropBoxUtils.cs" />
-    <Compile Include="Forms\DropBoxHistory.cs">
+    <Compile Include="DropboxConfiguration.cs" />
+    <Compile Include="DropboxInfo.cs" />
+    <Compile Include="DropboxPlugin.cs" />
+    <Compile Include="DropboxUtils.cs" />
+    <Compile Include="Forms\DropboxHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DropBoxHistory.Designer.cs">
-      <DependentUpon>DropBoxHistory.cs</DependentUpon>
+    <Compile Include="Forms\DropboxHistory.Designer.cs">
+      <DependentUpon>DropboxHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ListViewColumnSorter.cs" />
     <Compile Include="Forms\SettingsForm.cs">
@@ -103,11 +103,11 @@
     <Compile Include="Language.cs" />
     <Compile Include="LanguageKeys.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="DropBoxPlugin.resx">
-      <DependentUpon>DropBoxPlugin.cs</DependentUpon>
+    <EmbeddedResource Include="DropboxPlugin.resx">
+      <DependentUpon>DropboxPlugin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DropBoxHistory.resx">
-      <DependentUpon>DropBoxHistory.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\DropboxHistory.resx">
+      <DependentUpon>DropboxHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
@@ -132,7 +132,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dropbox.gif" />
-    <Content Include="Languages\language_DropBoxplugin-en-US.xml" />
+    <Content Include="Languages\language_Dropboxplugin-en-US.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SendToGreenShot.bat" />
@@ -140,7 +140,7 @@
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>$(ProjectDir)\..\tools\ILMerge\ILMerge /out:"GreenshotDropBoxPlugin.dll" "TempGreenshotDropBoxPlugin.dll"  "AppLimit.CloudComputing.SharpBox.dll" "Newtonsoft.Json.Net20.dll"
-copy "GreenshotDropBoxPlugin.dll" "GreenshotDropBoxPlugin.gsp"</PostBuildEvent>
+    <PostBuildEvent>$(ProjectDir)\..\tools\ILMerge\ILMerge /out:"GreenshotDropboxPlugin.dll" "TempGreenshotDropboxPlugin.dll"  "AppLimit.CloudComputing.SharpBox.dll" "Newtonsoft.Json.Net20.dll"
+copy "GreenshotDropboxPlugin.dll" "GreenshotDropboxPlugin.gsp"</PostBuildEvent>
   </PropertyGroup>
 </Project>

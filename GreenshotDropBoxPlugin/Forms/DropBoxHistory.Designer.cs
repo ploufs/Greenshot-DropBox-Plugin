@@ -6,9 +6,9 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-namespace GreenshotDropBoxPlugin.Forms
+namespace GreenshotDropboxPlugin.Forms
 {
-	partial class DropBoxHistory
+	partial class DropboxHistory
 	{
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
@@ -37,36 +37,36 @@ namespace GreenshotDropBoxPlugin.Forms
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DropBoxHistory));
-            this.listview_DropBox_uploads = new System.Windows.Forms.ListView();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DropboxHistory));
+            this.listview_Dropbox_uploads = new System.Windows.Forms.ListView();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItem_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.copyLinksToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem_Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.pictureBox_DropBox = new System.Windows.Forms.PictureBox();
+            this.pictureBox_Dropbox = new System.Windows.Forms.PictureBox();
             this.deleteButton = new System.Windows.Forms.Button();
             this.openButton = new System.Windows.Forms.Button();
             this.finishedButton = new System.Windows.Forms.Button();
             this.clipboardButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_DropBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Dropbox)).BeginInit();
             this.SuspendLayout();
             // 
-            // listview_DropBox_uploads
+            // listview_Dropbox_uploads
             // 
-            this.listview_DropBox_uploads.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.listview_Dropbox_uploads.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listview_DropBox_uploads.ContextMenuStrip = this.contextMenuStrip1;
-            this.listview_DropBox_uploads.FullRowSelect = true;
-            this.listview_DropBox_uploads.Location = new System.Drawing.Point(13, 5);
-            this.listview_DropBox_uploads.Name = "listview_DropBox_uploads";
-            this.listview_DropBox_uploads.Size = new System.Drawing.Size(557, 300);
-            this.listview_DropBox_uploads.TabIndex = 0;
-            this.listview_DropBox_uploads.UseCompatibleStateImageBehavior = false;
-            this.listview_DropBox_uploads.View = System.Windows.Forms.View.Details;
-            this.listview_DropBox_uploads.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listview_imgur_uploads_ColumnClick);
-            this.listview_DropBox_uploads.SelectedIndexChanged += new System.EventHandler(this.Listview_DropBox_uploadsSelectedIndexChanged);
+            this.listview_Dropbox_uploads.ContextMenuStrip = this.contextMenuStrip1;
+            this.listview_Dropbox_uploads.FullRowSelect = true;
+            this.listview_Dropbox_uploads.Location = new System.Drawing.Point(13, 5);
+            this.listview_Dropbox_uploads.Name = "listview_Dropbox_uploads";
+            this.listview_Dropbox_uploads.Size = new System.Drawing.Size(557, 300);
+            this.listview_Dropbox_uploads.TabIndex = 0;
+            this.listview_Dropbox_uploads.UseCompatibleStateImageBehavior = false;
+            this.listview_Dropbox_uploads.View = System.Windows.Forms.View.Details;
+            this.listview_Dropbox_uploads.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listview_imgur_uploads_ColumnClick);
+            this.listview_Dropbox_uploads.SelectedIndexChanged += new System.EventHandler(this.Listview_Dropbox_uploadsSelectedIndexChanged);
             // 
             // contextMenuStrip1
             // 
@@ -98,16 +98,16 @@ namespace GreenshotDropBoxPlugin.Forms
             this.ToolStripMenuItem_Delete.Text = "&Delete";
             this.ToolStripMenuItem_Delete.Click += new System.EventHandler(this.ToolStripMenuItem_Delete_Click);
             // 
-            // pictureBox_DropBox
+            // pictureBox_Dropbox
             // 
-            this.pictureBox_DropBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pictureBox_DropBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox_DropBox.Location = new System.Drawing.Point(13, 316);
-            this.pictureBox_DropBox.Name = "pictureBox_DropBox";
-            this.pictureBox_DropBox.Size = new System.Drawing.Size(90, 90);
-            this.pictureBox_DropBox.TabIndex = 1;
-            this.pictureBox_DropBox.TabStop = false;
-            this.pictureBox_DropBox.Click += new System.EventHandler(this.pictureBox_DropBox_Click);
+            this.pictureBox_Dropbox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pictureBox_Dropbox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox_Dropbox.Location = new System.Drawing.Point(13, 316);
+            this.pictureBox_Dropbox.Name = "pictureBox_Dropbox";
+            this.pictureBox_Dropbox.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox_Dropbox.TabIndex = 1;
+            this.pictureBox_Dropbox.TabStop = false;
+            this.pictureBox_Dropbox.Click += new System.EventHandler(this.pictureBox_Dropbox_Click);
             // 
             // deleteButton
             // 
@@ -157,7 +157,7 @@ namespace GreenshotDropBoxPlugin.Forms
             this.clipboardButton.UseVisualStyleBackColor = true;
             this.clipboardButton.Click += new System.EventHandler(this.ClipboardButtonClick);
             // 
-            // DropBoxHistory
+            // DropboxHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -166,14 +166,14 @@ namespace GreenshotDropBoxPlugin.Forms
             this.Controls.Add(this.finishedButton);
             this.Controls.Add(this.openButton);
             this.Controls.Add(this.deleteButton);
-            this.Controls.Add(this.pictureBox_DropBox);
-            this.Controls.Add(this.listview_DropBox_uploads);
+            this.Controls.Add(this.pictureBox_Dropbox);
+            this.Controls.Add(this.listview_Dropbox_uploads);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "DropBoxHistory";
-            this.Text = "DropBox history";
+            this.Name = "DropboxHistory";
+            this.Text = "Dropbox history";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ImgurHistoryFormClosing);
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_DropBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Dropbox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,8 +182,8 @@ namespace GreenshotDropBoxPlugin.Forms
 		private System.Windows.Forms.Button finishedButton;
 		private System.Windows.Forms.Button deleteButton;
 		private System.Windows.Forms.Button openButton;
-		private System.Windows.Forms.PictureBox pictureBox_DropBox;
-        private System.Windows.Forms.ListView listview_DropBox_uploads;
+		private System.Windows.Forms.PictureBox pictureBox_Dropbox;
+        private System.Windows.Forms.ListView listview_Dropbox_uploads;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem copyLinksToClipboardToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_Open;

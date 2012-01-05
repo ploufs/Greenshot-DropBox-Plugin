@@ -1,6 +1,6 @@
 ﻿/*
  * Greenshot - a free and open source screenshot tool
- * Copyright (C) 2011  Francis Noel
+ * Copyright (C) 2011-2012  Francis Noel
  * 
  * For more information see: http://getgreenshot.org/
  * The Greenshot project is hosted on Sourceforge: http://sourceforge.net/projects/greenshot/
@@ -22,19 +22,19 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-using GreenshotDropBoxPlugin.Forms;
+using GreenshotDropboxPlugin.Forms;
 using GreenshotPlugin.Core;
-using DropBox = AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
+using Dropbox = AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
 using AppLimit.CloudComputing.SharpBox;
 
-namespace GreenshotDropBoxPlugin {
+namespace GreenshotDropboxPlugin {
 	/// <summary>
 	/// Description of PasswordRequestForm.
 	/// </summary>
 	public partial class SettingsForm : Form {
 		private ILanguage lang = Language.GetInstance();
-	 private  DropBox.DropBoxConfiguration config = null;
-	   private DropBox.DropBoxRequestToken requestToken = null;
+	 private  Dropbox.DropBoxConfiguration config = null;
+	   private Dropbox.DropBoxRequestToken requestToken = null;
 
 
 		public SettingsForm(DropBoxConfiguration config) {
@@ -49,9 +49,9 @@ namespace GreenshotDropBoxPlugin {
 				combobox_uploadimageformat.Items.Add(format.ToString());
 			}
 
-			DropBoxUtils.LoadHistory();
+			DropboxUtils.LoadHistory();
 
-			if (config.runtimeDropBoxHistory.Count > 0) {
+			if (config.runtimeDropboxHistory.Count > 0) {
 				historyButton.Enabled = true;
 			} else {
 				historyButton.Enabled = false;
@@ -87,7 +87,10 @@ namespace GreenshotDropBoxPlugin {
 			set
 			{
 				this.authToken = value;
-				textBoxAuthToken.Text = AuthToken.ToString();
+				if (value != null)
+				{
+					textBoxAuthToken.Text = value.ToString();
+				}
 			}
 		}
 		
@@ -99,11 +102,12 @@ namespace GreenshotDropBoxPlugin {
 		void ButtonOKClick(object sender, EventArgs e)
 		{
 
-			if (config != null)
+			if (config != null && requestToken !=null)
 			{
 				// create the access token 
-				AuthToken = DropBox.DropBoxStorageProviderTools.ExchangeDropBoxRequestTokenIntoAccessToken(config,
-DropBoxUtils.DROPBOX_APP_KEY, DropBoxUtils.DROPBOX_APP_SECRET, requestToken);
+				AuthToken = Dropbox.DropBoxStorageProviderTools.ExchangeDropBoxRequestTokenIntoAccessToken(config,
+DropboxUtils.DROPBOX_APP_KEY, DropboxUtils.DROPBOX_APP_SECRET, requestToken);
+				requestToken = null;
 
 				this.DialogResult = DialogResult.OK;
 			}
@@ -118,7 +122,7 @@ DropBoxUtils.DROPBOX_APP_KEY, DropBoxUtils.DROPBOX_APP_SECRET, requestToken);
 		}
 		
 		void ButtonHistoryClick(object sender, EventArgs e) {
-			DropBoxHistory.ShowHistory();
+			DropboxHistory.ShowHistory();
 		}
 
 	   
@@ -129,29 +133,30 @@ DropBoxUtils.DROPBOX_APP_KEY, DropBoxUtils.DROPBOX_APP_SECRET, requestToken);
 				// get the config of dropbox 
 				config =
 				CloudStorage.GetCloudConfigurationEasy(nSupportedCloudConfigurations.DropBox) as
-				DropBox.DropBoxConfiguration;
+				Dropbox.DropBoxConfiguration;
 
-				// set your own callback which will be called from DropBox after successful  
+				// set your own callback which will be called from Dropbox after successful  
 				// authorization 
 				config.AuthorizationCallBack = new Uri("http://getgreenshot.org/");
 
 				// create a request token 
 				requestToken =
-				DropBox.DropBoxStorageProviderTools.GetDropBoxRequestToken(config,
-				DropBoxUtils.DROPBOX_APP_KEY,
-				DropBoxUtils.DROPBOX_APP_SECRET);
+				Dropbox.DropBoxStorageProviderTools.GetDropBoxRequestToken(config,
+				DropboxUtils.DROPBOX_APP_KEY,
+				DropboxUtils.DROPBOX_APP_SECRET);
 
 				// call the authorization url via WebBrowser Plugin 
 				String AuthorizationUrl =
-				DropBox.DropBoxStorageProviderTools.GetDropBoxAuthorizationUrl(config, requestToken);
+				Dropbox.DropBoxStorageProviderTools.GetDropBoxAuthorizationUrl(config, requestToken);
 
 				System.Diagnostics.Process.Start(AuthorizationUrl);
 			}
 			else
 			{
 				 // create the access token 
-				AuthToken = DropBox.DropBoxStorageProviderTools.ExchangeDropBoxRequestTokenIntoAccessToken(config,
-DropBoxUtils.DROPBOX_APP_KEY, DropBoxUtils.DROPBOX_APP_SECRET, requestToken);
+				AuthToken = Dropbox.DropBoxStorageProviderTools.ExchangeDropBoxRequestTokenIntoAccessToken(config,
+DropboxUtils.DROPBOX_APP_KEY, DropboxUtils.DROPBOX_APP_SECRET, requestToken);
+				requestToken = null;
 			}
 		}
 	}

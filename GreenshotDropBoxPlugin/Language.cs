@@ -26,13 +26,13 @@ using System.Threading;
 
 using GreenshotPlugin.Core;
 
-namespace GreenshotDropBoxPlugin {
+namespace GreenshotDropboxPlugin {
 	/// <summary>
 	/// Wrapper for the language container for the Jira plugin.
 	/// </summary>
 	public class Language : LanguageContainer, ILanguage  {
 		private static ILanguage uniqueInstance;
-		private const string LANGUAGE_FILENAME_PATTERN = @"language_DropBoxplugin-*.xml";
+		private const string LANGUAGE_FILENAME_PATTERN = @"language_Dropboxplugin-*.xml";
 		
 		public static ILanguage GetInstance() {
 			if(uniqueInstance == null) {

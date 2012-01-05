@@ -1,6 +1,6 @@
 ﻿/*
  * Greenshot - a free and open source screenshot tool
- * Copyright (C) 2011  Francis Noel
+ * Copyright (C) 2011-2012  Francis Noel
  * 
  * For more information see: http://getgreenshot.org/
  * The Greenshot project is hosted on Sourceforge: http://sourceforge.net/projects/greenshot/
@@ -30,36 +30,36 @@ using GreenshotPlugin.Controls;
 using GreenshotPlugin.Core;
 
 using AppLimit.CloudComputing.SharpBox;
-using DropBox=AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
+using Dropbox=AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
 
-namespace GreenshotDropBoxPlugin {
+namespace GreenshotDropboxPlugin {
 	/// <summary>
 	/// Description of ImgurUtils.
 	/// </summary>
-	public class DropBoxUtils {
-		private static readonly log4net.ILog LOG = log4net.LogManager.GetLogger(typeof(DropBoxUtils));
+	public class DropboxUtils {
+		private static readonly log4net.ILog LOG = log4net.LogManager.GetLogger(typeof(DropboxUtils));
 		public static string DROPBOX_APP_KEY = "uenz04wo9b4jrc8";
 		public static string DROPBOX_APP_SECRET = "im1609dep8eq8o4";
 		private static DropBoxConfiguration config = IniConfig.GetIniSection<DropBoxConfiguration>();
 
-		private DropBoxUtils() {
+		private DropboxUtils() {
 		}
 
 		public static void LoadHistory() {
-			if (config.runtimeDropBoxHistory == null) {
+			if (config.runtimeDropboxHistory == null) {
 				return;
 			}
-			if (config.DropBoxUploadHistory == null)
+			if (config.DropboxUploadHistory == null)
 			{
 				return;
 			}
 
-			if (config.runtimeDropBoxHistory.Count == config.DropBoxUploadHistory.Count) {
+			if (config.runtimeDropboxHistory.Count == config.DropboxUploadHistory.Count) {
 				return;
 			}
-			// Load the DropBox history
+			// Load the Dropbox history
 			List<string> hashes = new List<string>();
-			foreach (string hash in config.DropBoxUploadHistory.Keys)
+			foreach (string hash in config.DropboxUploadHistory.Keys)
 			{
 				hashes.Add(hash);
 			}
@@ -67,18 +67,18 @@ namespace GreenshotDropBoxPlugin {
 			bool saveNeeded = false;
 
 			foreach(string hash in hashes) {
-				if (config.runtimeDropBoxHistory.ContainsKey(hash)) {
+				if (config.runtimeDropboxHistory.ContainsKey(hash)) {
 					// Already loaded
 					continue;
 				}
 				try {
-					DropBoxInfo imgurInfo = DropBoxUtils.RetrieveDropBoxInfo(hash);
+					DropboxInfo imgurInfo = DropboxUtils.RetrieveDropboxInfo(hash);
 					if (imgurInfo != null) {
-						DropBoxUtils.RetrieveDropBoxThumbnail(imgurInfo);
-						config.runtimeDropBoxHistory.Add(hash, imgurInfo);
+						DropboxUtils.RetrieveDropboxThumbnail(imgurInfo);
+						config.runtimeDropboxHistory.Add(hash, imgurInfo);
 					} else {
 						LOG.DebugFormat("Deleting not found Dropbox {0} from config.", hash);
-						config.DropBoxUploadHistory.Remove(hash);
+						config.DropboxUploadHistory.Remove(hash);
 						saveNeeded = true;
 					}
 				} catch (Exception e) {
@@ -92,24 +92,24 @@ namespace GreenshotDropBoxPlugin {
 		}
 
 		/// <summary>
-		/// Do the actual upload to DropBox
+		/// Do the actual upload to Dropbox
 		/// For more details on the available parameters, see: http://sharpbox.codeplex.com/
 		/// </summary>
 		/// <param name="imageData">byte[] with image data</param>
-		/// <returns>DropBoxResponse</returns>
-		public static DropBoxInfo UploadToDropBox(byte[] imageData, string title, string filename)
+		/// <returns>DropboxResponse</returns>
+		public static DropboxInfo UploadToDropbox(byte[] imageData, string title, string filename)
 		{
 
 			// get the config of dropbox 
-			DropBox.DropBoxConfiguration dropBoxConfig =
+			Dropbox.DropBoxConfiguration dropBoxConfig =
 			CloudStorage.GetCloudConfigurationEasy(nSupportedCloudConfigurations.DropBox) as
-			DropBox.DropBoxConfiguration;
+			Dropbox.DropBoxConfiguration;
 			
 			// instanciate the cloudstorage manager
 			CloudStorage storage = new CloudStorage();
 
 			// open the connection to the storage
-			storage.Open(dropBoxConfig, config.DropBoxAccessToken);
+			storage.Open(dropBoxConfig, config.DropboxAccessToken);
 
 			// get the root entry of the cloud storage 
 			ICloudDirectoryEntry root = storage.GetRoot();
@@ -140,7 +140,7 @@ namespace GreenshotDropBoxPlugin {
 			}
 
 
-			return RetrieveDropBoxInfo(filename);
+			return RetrieveDropboxInfo(filename);
 		}
 
 		public static Image CreateThumbnail(Image image, int thumbWidth, int thumbHeight) {
@@ -157,7 +157,7 @@ namespace GreenshotDropBoxPlugin {
 			return bmp;
 		}
 
-		public static void RetrieveDropBoxThumbnail(DropBoxInfo imgurInfo) {
+		public static void RetrieveDropboxThumbnail(DropboxInfo imgurInfo) {
 			LOG.InfoFormat("Retrieving Dropbox image for {0} with url {1}", imgurInfo.ID, imgurInfo);
 			HttpWebRequest webRequest = (HttpWebRequest)NetworkHelper.CreatedWebRequest(imgurInfo.WebUrl);
 			webRequest.Method = "GET";
@@ -170,12 +170,12 @@ namespace GreenshotDropBoxPlugin {
 			return;
 		}
 
-		public static DropBoxInfo RetrieveDropBoxInfo(string filename)
+		public static DropboxInfo RetrieveDropboxInfo(string filename)
 		{
 
 			LOG.InfoFormat("Retrieving Dropbox info for {0}", filename);
 
-			DropBoxInfo dropBoxInfo = new DropBoxInfo();
+			DropboxInfo dropBoxInfo = new DropboxInfo();
 
 			dropBoxInfo.ID = filename;
 			dropBoxInfo.Title = filename;
@@ -183,9 +183,9 @@ namespace GreenshotDropBoxPlugin {
 			dropBoxInfo.WebUrl = string.Empty;
 
 			// get the config of dropbox 
-			DropBox.DropBoxConfiguration dropBoxConfig =
+			Dropbox.DropBoxConfiguration dropBoxConfig =
 			CloudStorage.GetCloudConfigurationEasy(nSupportedCloudConfigurations.DropBox) as
-			DropBox.DropBoxConfiguration;
+			Dropbox.DropBoxConfiguration;
 
 			// instanciate the cloudstorage manager
 			CloudStorage storage = new CloudStorage();
@@ -194,7 +194,7 @@ namespace GreenshotDropBoxPlugin {
 			ICloudDirectoryEntry root = storage.GetRoot();
 
 			// open the connection to the storage
-			storage.Open(dropBoxConfig, config.DropBoxAccessToken);
+			storage.Open(dropBoxConfig, config.DropboxAccessToken);
 			dropBoxInfo.WebUrl = storage.GetFileSystemObjectUrl(dropBoxInfo.ID, root).ToString();
 
 			ICloudFileSystemEntry fileSystemEntry = storage.GetFileSystemObject(dropBoxInfo.ID, root);
@@ -213,22 +213,22 @@ namespace GreenshotDropBoxPlugin {
 			return dropBoxInfo;
 		}
 
-		public static void DeleteDropBoxImage(DropBoxInfo dropBoxInfo)
+		public static void DeleteDropboxImage(DropboxInfo dropBoxInfo)
 		{
 			// Make sure we remove it from the history, if no error occured
-			config.runtimeDropBoxHistory.Remove(dropBoxInfo.ID);
-			config.DropBoxUploadHistory.Remove(dropBoxInfo.ID);
+			config.runtimeDropboxHistory.Remove(dropBoxInfo.ID);
+			config.DropboxUploadHistory.Remove(dropBoxInfo.ID);
 
 			// get the config of dropbox 
-			DropBox.DropBoxConfiguration dropBoxConfig =
+			Dropbox.DropBoxConfiguration dropBoxConfig =
 			CloudStorage.GetCloudConfigurationEasy(nSupportedCloudConfigurations.DropBox) as
-			DropBox.DropBoxConfiguration;
+			Dropbox.DropBoxConfiguration;
 
 			// instanciate the cloudstorage manager
 			CloudStorage storage = new CloudStorage();
 
 			// open the connection to the storage
-			storage.Open(dropBoxConfig, config.DropBoxAccessToken);
+			storage.Open(dropBoxConfig, config.DropboxAccessToken);
 
 			// get the root entry of the cloud storage 
 			ICloudDirectoryEntry root = storage.GetRoot();
@@ -258,7 +258,7 @@ namespace GreenshotDropBoxPlugin {
 
 				StreamReader tokenStream = new StreamReader(fileFullPath);
 
-				config.DropBoxAccessToken = storage.DeserializeSecurityToken(tokenStream.BaseStream);
+				config.DropboxAccessToken = storage.DeserializeSecurityToken(tokenStream.BaseStream);
 
 				// close the cloud storage connection
 				if (storage.IsOpened)
@@ -271,22 +271,21 @@ namespace GreenshotDropBoxPlugin {
 		internal static void SaveAccessToken()
 		{
 			
-			if (config.DropBoxAccessToken != null)
+			if (config.DropboxAccessToken != null)
 			{
 				// get the config of dropbox 
-				DropBox.DropBoxConfiguration dropBoxConfig =
+				Dropbox.DropBoxConfiguration dropBoxConfig =
 				CloudStorage.GetCloudConfigurationEasy(nSupportedCloudConfigurations.DropBox) as
-				DropBox.DropBoxConfiguration;
+				Dropbox.DropBoxConfiguration;
 
 				CloudStorage storage = new CloudStorage();
 
 				// open the connection to the storage
-				storage.Open(dropBoxConfig, config.DropBoxAccessToken);
+				storage.Open(dropBoxConfig, config.DropboxAccessToken);
 
-				Stream tokenStream = storage.SerializeSecurityToken(config.DropBoxAccessToken);
+				Stream tokenStream = storage.SerializeSecurityToken(config.DropboxAccessToken);
 
 				string fileFullPath = Path.Combine(Environment.CurrentDirectory, Environment.UserName + "-Dropbox.tok");
-				System.Windows.Forms.MessageBox.Show(fileFullPath);
 
 				// Create a FileStream object to write a stream to a file
 				using (FileStream fileStream = System.IO.File.Create(fileFullPath, (int)tokenStream.Length))
