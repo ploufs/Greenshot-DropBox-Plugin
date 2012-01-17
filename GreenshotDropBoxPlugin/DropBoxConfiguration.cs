@@ -21,17 +21,17 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-
+using AppLimit.CloudComputing.SharpBox;
 using GreenshotPlugin.Controls;
 using GreenshotPlugin.Core;
-using AppLimit.CloudComputing.SharpBox;
+using IniFile;
 
 namespace GreenshotDropboxPlugin {
 	/// <summary>
 	/// Description of ImgurConfiguration.
 	/// </summary>
 	[IniSection("Dropbox", Description = "Greenshot Dropbox Plugin configuration")]
-	public class DropBoxConfiguration : IniSection {
+	public class DropboxConfiguration : IniSection {
 		[IniProperty("DropboxAccessToken", Description = "Token.", DefaultValue = "")]
 		public ICloudStorageAccessToken DropboxAccessToken;
 

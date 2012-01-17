@@ -24,13 +24,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Net;
-using System.Text;
-using System.Web;
-using GreenshotPlugin.Controls;
-using GreenshotPlugin.Core;
-
 using AppLimit.CloudComputing.SharpBox;
-using Dropbox=AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
+using GreenshotPlugin.Core;
+using IniFile;
+using Dropbox = AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
 
 namespace GreenshotDropboxPlugin {
 	/// <summary>
@@ -40,7 +37,7 @@ namespace GreenshotDropboxPlugin {
 		private static readonly log4net.ILog LOG = log4net.LogManager.GetLogger(typeof(DropboxUtils));
 		public static string DROPBOX_APP_KEY = "SET APP KEY HERE";
 		public static string DROPBOX_APP_SECRET = "SET APP SECRET HERE";
-		private static DropBoxConfiguration config = IniConfig.GetIniSection<DropBoxConfiguration>();
+		private static DropboxConfiguration config = IniConfig.GetIniSection<DropboxConfiguration>();
 
 		private DropboxUtils() {
 		}

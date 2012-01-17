@@ -19,13 +19,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-
 using GreenshotPlugin.Controls;
 using GreenshotPlugin.Core;
+using IniFile;
 
 namespace GreenshotDropboxPlugin.Forms {
 	/// <summary>
@@ -34,7 +32,7 @@ namespace GreenshotDropboxPlugin.Forms {
 	public partial class DropboxHistory : Form {
 		private static readonly log4net.ILog LOG = log4net.LogManager.GetLogger(typeof(DropboxHistory));
 		private ListViewColumnSorter columnSorter;
-		private static DropBoxConfiguration config = IniConfig.GetIniSection<DropBoxConfiguration>();
+		private static DropboxConfiguration config = IniConfig.GetIniSection<DropboxConfiguration>();
 		private ILanguage lang = Language.GetInstance();
 		private static DropboxHistory instance;
 		

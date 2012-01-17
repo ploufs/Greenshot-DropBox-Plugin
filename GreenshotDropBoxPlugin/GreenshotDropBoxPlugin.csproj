@@ -69,7 +69,7 @@
     <Reference Include="AppLimit.CloudComputing.SharpBox">
       <HintPath>..\Greenshot\Lib\AppLimit.CloudComputing.SharpBox.dll</HintPath>
     </Reference>
-    <Reference Include="GreenshotPlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86" />
+    <Reference Include="GreenshotPlugin, Version=0.9.0.0, Culture=neutral, processorArchitecture=x86" />
     <Reference Include="log4net">
       <HintPath>..\Greenshot\Lib\log4net.dll</HintPath>
     </Reference>
@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DropboxConfiguration.cs" />
+    <Compile Include="DropboxDestination.cs" />
     <Compile Include="DropboxInfo.cs" />
     <Compile Include="DropboxPlugin.cs" />
     <Compile Include="DropboxUtils.cs" />

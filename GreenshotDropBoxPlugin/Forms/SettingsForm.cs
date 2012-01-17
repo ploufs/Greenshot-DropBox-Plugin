@@ -19,13 +19,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 using System;
-using System.Drawing;
 using System.Windows.Forms;
-
+using AppLimit.CloudComputing.SharpBox;
 using GreenshotDropboxPlugin.Forms;
 using GreenshotPlugin.Core;
 using Dropbox = AppLimit.CloudComputing.SharpBox.StorageProvider.DropBox;
-using AppLimit.CloudComputing.SharpBox;
 
 namespace GreenshotDropboxPlugin {
 	/// <summary>
@@ -37,7 +35,7 @@ namespace GreenshotDropboxPlugin {
 	   private Dropbox.DropBoxRequestToken requestToken = null;
 
 
-		public SettingsForm(DropBoxConfiguration config) {
+		public SettingsForm(DropboxConfiguration config) {
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
 			//

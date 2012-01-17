@@ -35,7 +35,7 @@ using Greenshot.Plugin;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Greenshot-Dropbox-Plugin")]
-[assembly: AssemblyCopyright("Copyright (C) 2011")]
+[assembly: AssemblyCopyright("Copyright (C) 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 // The PluginAttribute describes the "entryType" and if the plugin is configurable
